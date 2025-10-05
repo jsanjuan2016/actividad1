@@ -1,4 +1,4 @@
-import article from "src/js/article-element.js";
+import article from "https://jsanjuan2016.github.io/actividad1/src/js/article-element.js";
 
 const articlesLoaderModule = (function () {
     const queryString = window.location.search;
