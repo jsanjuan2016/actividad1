@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+      </style> 
+      <link rel="stylesheet" href="src/css/style.css" />
+      <link rel="stylesheet" href="src/css/fonts.css" />
+      <title>Actividad individual 1. Desarrollo de aplicaciones en red</title>
+  </head>
+  <body>
+
+      <header class="page-header" >
+          <h1 class="kaushan-script-regular mb-0">Actividad individual 1</h1>
+          <h5 class="lato-light-italic mt-0">Javier Sanjuan. Desarrollo de aplicaciones en red</h5>
+      </header>
+
+      <div class="content-wrapper">
+          <aside class="sidebar roboto-300">
+              <h3>Posts en esta página</h3>
+              <ul id="post-list">
+              </ul>
+          </aside>
+
+          <main class="main-content">
+              <h2>El blog para la actividad 1 de la asignatura <i>Desarrollo de aplicaciones en red</i></h2>
+              <p>Aplicación desarrollado en HTML 5, CSS 3 y javascript (vanilla, sin frameworks ni librer&iacute;as)</p>
+              <div id="toc-container"><ul></ul></div>
+
+              <div id="article-container" class="container">
+                <p>Cargando posts...</p>
+              </div>
+             
+              <div id="pagination-container" class="pagination"></div>      
+
+          </main>
+      </div>
+
+      <footer class="page-footer">
+          <p>Javier Sanjuan © 2025. <span class="text-cyan">Actividad 1 individual: <i>Creaci&oacute;n de un blog.</i></span> <span class="text-yellow">Asignatura: Desarrollo de aplicaciones en red</span></p>
+      </footer>
+
+      <script src="src/script.js"></script>
+      <script type="module" src="src/js/article-element.js" ></script>
+      <script type="module" src="src/js/articles-loader.js"></script>
+      <!-- <script type="module">
+        import articlesLoaderModule from './src/js/articles-loader.js';
+        articlesLoaderModule.init();
+      </script> -->
+  </body>
+</html>
