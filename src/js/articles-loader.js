@@ -1,4 +1,4 @@
-import article from "/src/js/article-element.js";
+import article from "./src/js/article-element.js";
 
 const articlesLoaderModule = (function () {
     const queryString = window.location.search;
