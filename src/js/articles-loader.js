@@ -22,7 +22,7 @@ const articlesLoaderModule = (function () {
 
       loadData: () => {
         // Cargar y procesar el archivo JSON
-        fetch("src/data/data.json")
+        fetch("https://jsanjuan2016.github.io/actividad1/src/data/data.json")
           .then((response) => {
             if (!response.ok) {
               throw new Error(`HTTP error, status = ${response.status}`);
