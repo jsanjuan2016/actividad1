@@ -23,13 +23,14 @@ export default class BlogPost extends HTMLElement {
     // Obtiene los valores de los atributos o usa valores predeterminados.
     const id = this.getAttribute('id') || 'Sin id';
     const idc = this.getAttribute('idc') || '';
+    const page = this.getAttribute('page') || 1;
     const title = this.getAttribute('title') || 'Sin título';
     const date = this.getAttribute('date') || 'Sin fecha';
     const content = this.getAttribute('content') || 'Sin contenido';
     const ispost = this.getAttribute('ispost') || 'false';
     const ref = this.getAttribute('ref') || '';
     const fullRef = ref === '' || ref === "undefined" ? `` : `<span class="reference">Ref.: <a href="${ref}" target="_blank">[Art&iacute;culo original] ${title}</a></span>`;
-    const postRef = idc === '' || ref === "undefined" ? `` : `post.html?idc=${idc}`;
+    const postRef = idc === '' || ref === "undefined" ? `` : `post.html?idc=${idc}&page=${page}`;
     const continueReading = idc === '' || ref === "undefined" ? `` : `[<a href="${postRef}">Seguir leyendo</a>]`;
     
 
@@ -81,7 +82,7 @@ export default class BlogPost extends HTMLElement {
         <p class="post-content">${content} ${continueReading}</p>
         ${fullRef}
         `
-        + (ispost === 'true' ? '<a href="index.html">Volver</a>' : '<a href="#post-list">Arriba</a>') +
+        + (ispost === 'true' ? '<a href="index.html">Volver al inicio</a>' : '<a href="#post-list">Arriba</a>') +
         ` 
       </article>
     `;

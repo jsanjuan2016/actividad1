@@ -1,4 +1,4 @@
-import article from "https://jsanjuan2016.github.io/actividad1/src/js/article-element.js";
+import article from "../js/article-element.js";
 
 const articlesLoaderModule = (function () {
     const queryString = window.location.search;
@@ -22,7 +22,7 @@ const articlesLoaderModule = (function () {
 
       loadData: () => {
         // Cargar y procesar el archivo JSON
-        fetch("https://jsanjuan2016.github.io/actividad1/src/data/data.json")
+        fetch("src/data/data.json")
           .then((response) => {
             if (!response.ok) {
               throw new Error(`HTTP error, status = ${response.status}`);
@@ -33,9 +33,10 @@ const articlesLoaderModule = (function () {
             let cont = 0;
             operations.createTableOfContents(data);
 
+            operations.cleanContainerContent();
             const postsToRender = data.slice(START_INDEX, END_INDEX);
             for (const article of postsToRender) { 
-              operations.createArticleElement(`${cont}`, article.title, article.date, article.content, article.href);
+              operations.createArticleElement(`${cont}`, article.title, article.date, article.content, article.href, CURRENT_PAGE);
               operations.createListItem(`${cont}`, article.title);
               cont++;
             }
@@ -55,16 +56,20 @@ const articlesLoaderModule = (function () {
             console.error(error);
           });          
       },
-      createArticleElement: (id, title, date, content, href) => {
+      createArticleElement: (id, title, date, content, href, page) => {
         const articleElement = document.createElement('article-element');
         articleElement.setAttribute('id', `blog_entry_${id}`);
         articleElement.setAttribute('idc', `${id}`);
+        articleElement.setAttribute('page', `${page}`);
         articleElement.setAttribute('title', title);
         articleElement.setAttribute('date', date);
         articleElement.setAttribute('content', operations.truncate(content, 200));
         articleElement.setAttribute('ref', href);
 
         settings.articleContainer.appendChild(articleElement);
+      },
+      cleanContainerContent: () => {
+        settings.articleContainer.innerHTML = '';
       },
       createListItem: (id, title)  =>{
         const li = document.createElement("li");

@@ -1,9 +1,12 @@
-import article from "https://jsanjuan2016.github.io/actividad1/src/js/article-element.js";
+import article from "../js/article-element.js";
 
 const articleLoaderModule = (function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get('idc');
+    const page = urlParams.get('page') === null ? 1 : urlParams.get('page');
+
+    const POST_PER_PAGE = 5; //Número de posts por página
 
     let settings = {
       articleContainer: document.querySelector('#article-container'),
@@ -13,7 +16,7 @@ const articleLoaderModule = (function () {
     };
     let operations = {
       loadData: () => {
-        fetch("https://jsanjuan2016.github.io/actividad1/src/data/data.json")
+        fetch("src/data/data.json")
           .then((response) => {
             if (!response.ok) {
               throw new Error(`HTTP error, status = ${response.status}`);
@@ -21,9 +24,11 @@ const articleLoaderModule = (function () {
             return response.json();
           })
           .then((data) => {
-            const postsToRender = data.slice(id, parseInt(id) + 1);
+            operations.cleanContainerContent();
+            let startpos = parseInt(id) + POST_PER_PAGE * (page - 1);
+            const postsToRender = data.slice(startpos, startpos + 1); //data.slice(id, parseInt(id) + 1);
             for (const article of postsToRender) { 
-              operations.createArticleElement(`${id}`, article.title, article.date, article.content, article.href); 
+              operations.createArticleElement(`${id}`, article.title, article.date, article.content, article.href, page); 
             }
           })
           .catch((error) => {
@@ -35,13 +40,18 @@ const articleLoaderModule = (function () {
       createArticleElement: (id, title, date, content, href) => {
           const articleElement = document.createElement('article-element');
           articleElement.setAttribute('id', `blog_entry_${id}`);
+          articleElement.setAttribute('page', `${page}`);
           articleElement.setAttribute('title', title);
           articleElement.setAttribute('date', date);
           articleElement.setAttribute('content', content);
           articleElement.setAttribute('ref', href);
           articleElement.setAttribute('ispost', true);
+          settings.articleContainer.innerHTML = ''; //Limpiar el contenedor de artículos
           settings.articleContainer.appendChild(articleElement);
       },
+      cleanContainerContent: () => {
+        settings.articleContainer.innerHTML = '';
+      },      
       truncate: (input, length) => input.length > (length || 5) ? `${input.substring(0, length)}...` : input
     };
 
